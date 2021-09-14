@@ -7,13 +7,8 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
 		setAuthToken(localStorage.token);
 	}
 	try {
-		const res = await axios.get("http://localhost:5000/api/auth", {
-			headers: {
-				"auth-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE0MDE2NDI2ODVjNTczZGRlZDJmNDQzIn0sImlhdCI6MTYzMTU4OTk1NX0.ngD2a0EixZ8m_475lJvuTmpjqTsY9pBSygQ4LfZfvjo",
-			},
-		});
-		return res.data;
+		const promise = await axios.get("http://localhost:5000/api/auth");
+		return console.log(promise.data);
 	} catch (error) {
 		console.error(error.message);
 	}
