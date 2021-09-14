@@ -7,7 +7,6 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
 });
 
 const initialState = {
-	isAuthenticated: null,
 	loading: true,
 	user: "",
 };
@@ -22,12 +21,10 @@ const user = createSlice({
 		[loadUser.fulfilled]: (state, action) => {
 			state.loading = false;
 			state.user = action.payload;
-			state.isAuthenticated = true;
 		},
 		[loadUser.rejected]: (state) => {
 			state.loading = false;
 			state.user = null;
-			state.isAuthenticated = false;
 			localStorage.removeItem("token");
 		},
 	},

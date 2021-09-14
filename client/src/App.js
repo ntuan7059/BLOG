@@ -5,7 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/layout/Alert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./reducer/loadUser";
 import setAuthToken from "./utils/setAuthToken";
 import { useEffect } from "react";
@@ -16,7 +16,6 @@ function App() {
 	useEffect(() => {
 		dispatch(loadUser());
 	}, [dispatch]);
-
 	return (
 		<div className='App'>
 			<Router>

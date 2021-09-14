@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../reducer/auth";
+import { Link, Redirect } from "react-router-dom";
 
 function Login() {
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const dispatch = useDispatch();
 	const [account, setAccount] = useState({
 		email: "",
@@ -16,6 +18,9 @@ function Login() {
 		e.preventDefault();
 		dispatch(login(email, password));
 	};
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 	return (
 		<div>
 			<section class='container'>
@@ -51,7 +56,8 @@ function Login() {
 					/>
 				</form>
 				<p class='my-1'>
-					Bạn chưa có tài khoản <a href='register.html'>Đăng ký</a>
+					Bạn chưa có tài khoản
+					<Link to='/register'>Đăng ký</Link>
 				</p>
 			</section>
 		</div>

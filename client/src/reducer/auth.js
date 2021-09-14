@@ -44,6 +44,13 @@ const initialState = {
 const auth = createSlice({
 	name: "auth",
 	initialState,
+	reducers: {
+		logout(state, action) {
+			state.token = localStorage.removeItem("token");
+			state.loading = false;
+			state.isAuthenticated = false;
+		},
+	},
 	extraReducers: {
 		[register.pending]: (state) => {
 			state.loading = true;
@@ -79,5 +86,5 @@ const auth = createSlice({
 		},
 	},
 });
-
+export const { logout } = auth.actions;
 export default auth.reducer;

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_ALERT, REMOVE_ALERT } from "../../reducer/alert";
 import { nanoid } from "@reduxjs/toolkit";
 import { register } from "../../reducer/auth";
+import { Link, Redirect } from "react-router-dom";
 
 function Register() {
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const [state, setState] = useState({
 		name: "",
 		email: "",
@@ -32,7 +34,9 @@ function Register() {
 			dispatch(register({ name, email, password }));
 		}
 	};
-
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 	return (
 		<div>
 			<h1 class='large text-primary'>Đăng Ký</h1>
@@ -87,7 +91,7 @@ function Register() {
 				<input type='submit' class='btn btn-primary' value='Register' />
 			</form>
 			<p class='my-1'>
-				Bạn có tài khoản rồi? <a href='login.html'>Đăng nhập</a>
+				Bạn có tài khoản rồi? <Link to='/login'>Đăng nhập</Link>
 			</p>
 		</div>
 	);
