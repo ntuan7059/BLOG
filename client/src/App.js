@@ -6,18 +6,17 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/layout/Alert";
 import { useDispatch } from "react-redux";
-import { loadUser } from "./reducer/auth";
-import { useEffect } from "react";
-import axios from "axios";
+import { loadUser } from "./reducer/loadUser";
 import setAuthToken from "./utils/setAuthToken";
+import { useEffect } from "react";
 
 function App() {
+	const dispatch = useDispatch();
 	setAuthToken(localStorage.token);
-	async function axiosTest() {
-		const promise = await axios.get("http://localhost:5000/api/auth");
-		return console.log(promise.data);
-	}
-	axiosTest();
+	useEffect(() => {
+		dispatch(loadUser());
+	}, [dispatch]);
+
 	return (
 		<div className='App'>
 			<Router>
