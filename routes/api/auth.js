@@ -3,10 +3,13 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const User = require("../../module/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+
 const { check, validationResult } = require("express-validator");
 
 // @route GET api/auth
-// @desc  Test
+// @desc  get user
 // @access PUBLIC
 router.get("/", auth, async (req, res) => {
 	try {
@@ -17,29 +20,30 @@ router.get("/", auth, async (req, res) => {
 	}
 });
 
-// @route POSTapi/auth
-// @desc  authenticate & get token
+// @route POST api/auth
+// @desc  authenticate & get token login
 // @access PUBLIC
 router.post(
 	"/",
 	[
-		check("email", "please put correct email").isEmail(),
-		check("password", "enter 6 characters").isLength({ min: 6 }),
+		check("email", "please put email").exists(),
+		check("password", "pls put password").exists(),
 	],
 	async (req, res) => {
-		const err = validationResult(req);
+		const err = validationResult(req.body);
 		if (!err.isEmpty()) {
 			return res.status(400).json({ errors: err.array() });
 		}
 		const { email, password } = req.body;
 		try {
-			// co user chua ?
+			// is there any user ?
 			let user = await User.findOne({ email });
 			if (!user) {
-				return res.status(400).json({ msg: "invalid email" });
+				return res.status(400).json({ errors: [{ msg: "invalid email" }] });
 			}
 
 			// return JWT
+
 			const isMatch = await bcrypt.compare(password, user.password);
 
 			if (!isMatch) {
@@ -56,6 +60,7 @@ router.post(
 			});
 		} catch (error) {
 			console.log(error.message);
+			res.status(500).send("server error");
 		}
 	}
 );

@@ -3,9 +3,9 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
+
 const jwt = require("jsonwebtoken");
 const config = require("config");
-
 
 const User = require("../../module/User");
 // @route POSTapi/users
@@ -44,9 +44,8 @@ router.post(
 				password,
 			});
 			// encrypt Password
-			const salt = await bcrypt.genSalt(10);
 
-			user.password = await bcrypt.hash(password, salt);
+			user.password = await bcrypt.hash(user.password, 10);
 
 			await user.save();
 			// return JWT

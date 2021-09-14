@@ -18,6 +18,23 @@ export const register = createAsyncThunk(
 	}
 );
 
+export const login = createAsyncThunk(
+	"auth/login",
+	async ({ email, password }) => {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		const res = await axios.post(
+			"http://localhost:5000/api/auth",
+			{ email, password },
+			config
+		);
+		return res.data;
+	}
+);
+
 const initialState = {
 	token: localStorage.getItem("token"),
 	loading: true,
@@ -39,6 +56,22 @@ const auth = createSlice({
 			localStorage.setItem("token", action.payload.token);
 		},
 		[register.rejected]: (state) => {
+			state.token = null;
+			state.loading = false;
+			state.isAuthenticated = false;
+			localStorage.removeItem("token");
+		},
+		[login.pending]: (state) => {
+			state.loading = true;
+			state.isAuthenticated = false;
+		},
+		[login.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.token = action.payload;
+			state.isAuthenticated = true;
+			localStorage.setItem("token", action.payload.token);
+		},
+		[login.rejected]: (state) => {
 			state.token = null;
 			state.loading = false;
 			state.isAuthenticated = false;
