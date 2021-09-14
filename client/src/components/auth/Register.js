@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SET_ALERT, REMOVE_ALERT } from "../../reducer/alert";
 import { nanoid } from "@reduxjs/toolkit";
 import { register } from "../../reducer/auth";
 
 function Register() {
-	const id = nanoid();
-	const dispatch = useDispatch();
 	const [state, setState] = useState({
 		name: "",
 		email: "",
 		password: "",
-		password2: "",
 	});
+	const id = nanoid();
+	const dispatch = useDispatch();
 	const { name, email, password, password2 } = state;
 	const onChange = (e) => {
 		setState({ ...state, [e.target.name]: e.target.value });
