@@ -18,7 +18,7 @@ function Login() {
 	};
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		await dispatch(login(email, password));
+		await dispatch(login({ email, password }));
 		setAuthToken(localStorage.token);
 		await dispatch(loadUser());
 	};

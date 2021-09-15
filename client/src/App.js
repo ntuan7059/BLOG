@@ -5,10 +5,13 @@ import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/layout/Alert";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loadUser } from "./reducer/loadUser";
 import setAuthToken from "./utils/setAuthToken";
 import { useEffect } from "react";
+import Privateroute from "./components/routing/Privateroute";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CreateProfile from "./components/profile-form/CreateProfile";
 
 function App() {
 	const dispatch = useDispatch();
@@ -26,6 +29,12 @@ function App() {
 					<Switch>
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
+						<Privateroute exact path='/dashboard' component={Dashboard} />
+						<Privateroute
+							exact
+							path='/create-profile'
+							component={CreateProfile}
+						/>
 					</Switch>
 				</div>
 			</Router>

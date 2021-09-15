@@ -30,6 +30,12 @@ function Navbar() {
 						<>
 							<ul>
 								<li>
+									<Link to='/dashboard'>
+										<i className='fas fa-user'></i>
+										<span className='hide-sm'> Dashboard</span>
+									</Link>
+								</li>
+								<li>
 									<Link to='#' onClick={(e) => dispatch(logout(e))}>
 										<i className='fas fa-sign-out-alt'></i>
 										<span className='hide-sm'> Đăng xuất</span>

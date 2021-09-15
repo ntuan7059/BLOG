@@ -15,6 +15,7 @@ router.get("/me", auth, async (req, res) => {
 			["name", "avatar"]
 		);
 		if (!profile) return res.status(400).json({ msg: "No Profile" });
+		res.json(profile);
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send("server error");
@@ -28,7 +29,7 @@ router.post(
 	"/",
 	[auth, [check("status", "status is reqire").not().isEmpty()]],
 	async (req, res) => {
-		const errors = validationResult(req);
+		const errors = validationResult(req.body);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
 		}
@@ -50,7 +51,8 @@ router.post(
 		//build profile object
 		const profileField = {};
 		profileField.user = req.user.id;
-		if (skills) profileField.skills = skills;
+		if (skills)
+			profileField.skills = skills.split(",").map((skill) => skill.trim());
 		if (company) profileField.company = company;
 		if (website) profileField.website = website;
 		if (location) profileField.location = location;
