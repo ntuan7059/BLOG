@@ -30,7 +30,7 @@ router.post(
 		check("password", "pls put password").exists(),
 	],
 	async (req, res) => {
-		const err = validationResult(req.body);
+		const err = validationResult(req);
 		if (!err.isEmpty()) {
 			return res.status(400).json({ errors: err.array() });
 		}
