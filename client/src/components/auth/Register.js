@@ -4,6 +4,8 @@ import { SET_ALERT, REMOVE_ALERT } from "../../reducer/alert";
 import { nanoid } from "@reduxjs/toolkit";
 import { register } from "../../reducer/auth";
 import { Link, Redirect } from "react-router-dom";
+import { loadUser } from "../../reducer/loadUser";
+import setAuthToken from "../../utils/setAuthToken";
 
 function Register() {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -30,9 +32,10 @@ function Register() {
 				})
 			);
 			setTimeout(() => dispatch(REMOVE_ALERT({ id })), 5000);
-		} else {
-			dispatch(register({ name, email, password }));
 		}
+		await dispatch(register({ name, email, password }));
+		setAuthToken(localStorage.token);
+		await dispatch(loadUser());
 	};
 	if (isAuthenticated) {
 		return <Redirect to='/dashboard' />;

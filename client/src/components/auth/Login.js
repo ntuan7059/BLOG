@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../reducer/auth";
 import { Link, Redirect } from "react-router-dom";
+import { loadUser } from "../../reducer/loadUser";
+import setAuthToken from "../../utils/setAuthToken";
 
 function Login() {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -14,9 +16,11 @@ function Login() {
 	const onChange = (e) => {
 		setAccount({ ...account, [e.target.name]: e.target.value });
 	};
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(login(email, password));
+		await dispatch(login(email, password));
+		setAuthToken(localStorage.token);
+		await dispatch(loadUser());
 	};
 	if (isAuthenticated) {
 		return <Redirect to='/dashboard' />;
@@ -28,7 +32,10 @@ function Login() {
 				<p class='lead'>
 					<i class='fas fa-user'></i> đăng nhập vào tài khoản của bạn
 				</p>
-				<form class='form' action='dashboard.html'>
+				<form
+					class='form'
+					action='dashboard.html'
+					onSubmit={(e) => onSubmit(e)}>
 					<div class='form-group'>
 						<input
 							type='email'
@@ -48,16 +55,11 @@ function Login() {
 							onChange={(e) => onChange(e)}
 						/>
 					</div>
-					<input
-						type='submit'
-						class='btn btn-primary'
-						value='đăng nhập'
-						onSubmit={(e) => onSubmit(e)}
-					/>
+					<input type='submit' class='btn btn-primary' value='đăng nhập' />
 				</form>
 				<p class='my-1'>
-					Bạn chưa có tài khoản
-					<Link to='/register'>Đăng ký</Link>
+					Bạn chưa có tài khoản?
+					<Link to='/register'> Đăng ký</Link>
 				</p>
 			</section>
 		</div>

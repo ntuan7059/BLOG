@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const loadUser = createAsyncThunk("auth/loadUser", async () => {
+export const loadUser = createAsyncThunk("user/loadUser", async () => {
 	const promise = await axios.get("http://localhost:5000/api/auth");
 	return promise.data;
 });
