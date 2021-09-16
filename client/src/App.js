@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import Privateroute from "./components/routing/Privateroute";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateProfile from "./components/profile-form/CreateProfile";
+import EditProfile from "./components/profile-form/EditProfile";
 
 function App() {
 	const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
 							path='/create-profile'
 							component={CreateProfile}
 						/>
+						<Privateroute exact path='/edit-profile' component={EditProfile} />
 					</Switch>
 				</div>
 			</Router>

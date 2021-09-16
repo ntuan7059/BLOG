@@ -42,7 +42,7 @@ export const updateProfile = createAsyncThunk(
 );
 
 const initialState = {
-	profile: [],
+	profile: null,
 	profiles: [],
 	loading: false,
 };

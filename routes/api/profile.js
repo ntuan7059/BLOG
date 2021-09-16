@@ -78,6 +78,7 @@ router.post(
 					{ $set: profileField },
 					{ new: true }
 				);
+				await profile.save();
 				return res.json(profile);
 			}
 			// create
