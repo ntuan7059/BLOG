@@ -168,7 +168,7 @@ img {
 .bg-light,
 .badge-light,
 .alert-light {
-	background: var(--light-color);
+	background: #b3b3b3;
 	color: #333;
 }
 
