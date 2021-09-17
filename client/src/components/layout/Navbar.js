@@ -19,6 +19,9 @@ const guestLink = (
 function Navbar() {
 	const state = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
+	function refreshPage() {
+		window.location.reload();
+	}
 	return (
 		<nav className='navbar bg-dark'>
 			<Link to='/' className='special'>
@@ -36,7 +39,12 @@ function Navbar() {
 									</Link>
 								</li>
 								<li>
-									<Link to='#' onClick={(e) => dispatch(logout(e))}>
+									<Link
+										to='#'
+										onClick={(e) => {
+											refreshPage();
+											dispatch(logout());
+										}}>
 										<i className='fas fa-sign-out-alt'></i>
 										<span className='hide-sm'> Đăng xuất</span>
 									</Link>

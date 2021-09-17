@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser, updateProfile } from "../../reducer/profile";
+import { updateProfile } from "../../reducer/profile";
 import setAuthToken from "../../utils/setAuthToken";
 import { useHistory } from "react-router-dom";
 
@@ -51,7 +51,18 @@ function EditProfile() {
 			youtube: profile.social.youtube ? "" : profile.social.youtube,
 			instagram: profile.social.instagram ? "" : profile.social.instagram,*/
 		});
-	}, []);
+	}, [
+		profile.user.company,
+		profile.user.website,
+		profile.user.location,
+		profile.user.status,
+		profile.company,
+		profile.website,
+		profile.location,
+		profile.status,
+		profile.skills,
+		profile.bio,
+	]);
 
 	const onChange = (e) => {
 		e.preventDefault();

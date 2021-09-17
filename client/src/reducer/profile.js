@@ -41,6 +41,41 @@ export const updateProfile = createAsyncThunk(
 	}
 );
 
+export const addEdu = createAsyncThunk("profile/addEdu", async (edu) => {
+	try {
+	} catch (error) {}
+	const res = await axios
+		.put(
+			"http://localhost:5000/api/profile/education",
+
+			edu,
+
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		)
+		.catch((err) => {
+			console.log(err);
+			throw err;
+		});
+	return res.data;
+});
+
+export const addExp = createAsyncThunk("profile/addExp", async (exp) => {
+	const res = await axios.put(
+		"http://localhost:5000/api/profile/experience",
+		exp,
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
+	return res.data;
+});
+
 const initialState = {
 	profile: null,
 	profiles: [],
@@ -69,6 +104,26 @@ const profile = createSlice({
 			state.profile = action.payload;
 		},
 		[updateProfile.rejected]: (state) => {
+			state.loading = false;
+		},
+		[addEdu.pending]: (state) => {
+			state.loading = true;
+		},
+		[addEdu.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.profile = action.payload;
+		},
+		[addEdu.rejected]: (state) => {
+			state.loading = false;
+		},
+		[addExp.pending]: (state) => {
+			state.loading = true;
+		},
+		[addExp.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.profile = action.payload;
+		},
+		[addExp.rejected]: (state) => {
 			state.loading = false;
 		},
 	},
