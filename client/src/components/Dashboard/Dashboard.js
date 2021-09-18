@@ -1,14 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../../reducer/profile";
+import { deleteUser, getCurrentUser } from "../../reducer/profile";
 import DashboardAction from "./DashboardAction";
+import Education from "./Education";
+import Experience from "./Experience";
+import { useHistory } from "react-router-dom";
 
 function Dashboard() {
+	let history = useHistory();
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getCurrentUser());
 	}, [dispatch]);
+	const onChange = async (e) => {
+		await dispatch(deleteUser());
+		history.push("/login");
+	};
 	const user = useSelector((state) => state.user.user);
 	const profile = useSelector((state) => state.profile);
 	if (user == null) {
@@ -32,6 +40,13 @@ function Dashboard() {
 				) : (
 					<>
 						<DashboardAction />
+						<Experience />
+						<Education />
+						<div className='my-2'>
+							<button className='btn btn-danger' onClick={(e) => onChange(e)}>
+								<i className='fas fa-user-minus'> Xóa tài khoản</i>
+							</button>
+						</div>
 					</>
 				)}
 			</>

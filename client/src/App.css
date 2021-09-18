@@ -43,7 +43,9 @@ img {
 	margin-top: 6rem;
 	margin-bottom: 3rem;
 }
-
+.exp {
+	background-color: #cfcfcf;
+}
 /* Text Styles*/
 .x-large {
 	font-size: 4rem;

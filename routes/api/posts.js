@@ -14,14 +14,14 @@ router.post(
 	"/",
 	[auth, [check("text", "Text is required").not().isEmpty]],
 	async (req, res) => {
-		const error = validationResult(req);
+		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.arrays() });
 		}
 
 		try {
 			const user = await User.findById(req.user.id).select("-password");
-			const mewPost = {
+			const newPost = {
 				text: req.body.text,
 				name: user.name,
 				avatar: user.avatar,

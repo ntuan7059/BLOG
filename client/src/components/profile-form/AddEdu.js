@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 function AddEdu() {
+	const [display, setDisplay] = useState(true);
 	let history = useHistory();
 	const dispatch = useDispatch();
 	const [edu, setEdu] = useState({
@@ -82,6 +83,7 @@ function AddEdu() {
 								value={current}
 								onChange={(e) => {
 									setEdu({ ...edu, current: !current });
+									setDisplay(!display);
 								}}
 							/>{" "}
 							Trường đang học
@@ -93,6 +95,7 @@ function AddEdu() {
 							type='date'
 							name='to'
 							value={to}
+							disabled={display ? "" : true}
 							onChange={(e) => onChange(e)}
 						/>
 					</div>
