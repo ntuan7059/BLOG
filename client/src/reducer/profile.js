@@ -140,6 +140,11 @@ const initialState = {
 const profile = createSlice({
 	name: "profile",
 	initialState,
+	reducers: {
+		deleteProfile(action, state) {
+			state.profile = null;
+		},
+	},
 	extraReducers: {
 		[getCurrentUser.pending]: (state) => {
 			state.loading = true;
@@ -226,12 +231,12 @@ const profile = createSlice({
 		},
 		[getById.fulfilled]: (state, action) => {
 			state.loading = false;
-			state.profiles = action.payload;
+			state.profile = action.payload;
 		},
 		[getById.rejected]: (state) => {
 			state.loading = false;
 		},
 	},
 });
-
+export const { deleteProfile } = profile.actions;
 export default profile.reducer;

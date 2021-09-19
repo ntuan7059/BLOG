@@ -60,15 +60,15 @@ const ProfileSchema = new mongoose.Schema({
 	education: [
 		{
 			school: {
-				type: Array,
+				type: String,
 				required: true,
 			},
 			degree: {
-				type: Array,
+				type: String,
 				required: true,
 			},
 			fieldofstudy: {
-				type: Array,
+				type: String,
 				required: true,
 			},
 			from: {
@@ -83,7 +83,7 @@ const ProfileSchema = new mongoose.Schema({
 				default: false,
 			},
 			description: {
-				type: Array,
+				type: String,
 			},
 		},
 	],

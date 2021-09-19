@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getAll } from "../../reducer/profile";
+import { deleteProfile, getAll } from "../../reducer/profile";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileItems from "./ProfileItems";
 function Profiles() {

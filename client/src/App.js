@@ -16,6 +16,7 @@ import EditProfile from "./components/profile-form/EditProfile";
 import AddExp from "./components/profile-form/AddEx";
 import AddEdu from "./components/profile-form/AddEdu";
 import Profiles from "./components/Profiles/Profiles";
+import Profile from "./components/profile/Profile";
 
 function App() {
 	const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
 					<Alert />
 					<Switch>
 						<Route exact path='/user' component={Profiles} />
+						<Route exact path='/user/:id' component={Profile} />
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
 						<Privateroute exact path='/dashboard' component={Dashboard} />
