@@ -105,7 +105,14 @@ function EachProfile({
 								{experience.map((experience) => (
 									<>
 										<h3 className='text-dark'>{experience.company}</h3>
-										<Moment format='YYYY/MM/DD'>{experience.to}</Moment>
+										<Moment format='YYYY/MM/DD'>
+											{experience.from}
+										</Moment> -{" "}
+										{experience.to ? (
+											<Moment format='YYYY/MM/DD'>{experience.to}</Moment>
+										) : (
+											<p>Hiện tại</p>
+										)}
 										<p>
 											<strong>Vị trí làm việc: </strong>
 											{experience.title}
@@ -129,7 +136,12 @@ function EachProfile({
 						education.map((education) => (
 							<>
 								<h3>{education.school}</h3>
-								<Moment format='YYYY/MM/DD'>{experience.to}</Moment>
+								<Moment format='YYYY/MM/DD'>{education.from}</Moment> -{" "}
+								{education.to ? (
+									<Moment format='YYYY/MM/DD'>{education.to}</Moment>
+								) : (
+									<p>Hiện tại</p>
+								)}
 								<p>
 									<strong>Bằng cấp: </strong>
 									{education.degree}

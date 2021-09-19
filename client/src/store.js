@@ -3,6 +3,7 @@ import alertReducer from "./reducer/alert";
 import auth from "./reducer/auth";
 import user from "./reducer/loadUser";
 import profile from "./reducer/profile";
+import post from "./reducer/post";
 
 export const store = configureStore({
 	reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
 		auth: auth,
 		user: user,
 		profile: profile,
+		post: post,
 	},
 });

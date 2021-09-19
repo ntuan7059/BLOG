@@ -33,6 +33,12 @@ function Navbar() {
 						<>
 							<ul>
 								<li>
+									<Link to='/posts'>Blogs</Link>
+								</li>
+								<li>
+									<Link to='/user'>Người dùng</Link>
+								</li>
+								<li>
 									<Link to='/dashboard'>
 										<i className='fas fa-user'></i>
 										<span className='hide-sm'> Dashboard</span>
