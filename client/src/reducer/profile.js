@@ -111,9 +111,29 @@ export const deleteUser = createAsyncThunk("profile/deleteUser", async () => {
 	}
 });
 
+export const getAll = createAsyncThunk("profile/getAll", async () => {
+	try {
+		const res = await axios.get("http://localhost:5000/api/profile");
+		return res.data;
+	} catch (error) {
+		console.log(error.message);
+	}
+});
+
+export const getById = createAsyncThunk("profile/getById", async (user_id) => {
+	try {
+		const res = await axios.get(
+			`http://localhost:5000/api/profile/user/${user_id}`
+		);
+		return res.data;
+	} catch (error) {
+		console.log(error.message);
+	}
+});
+
 const initialState = {
 	profile: null,
-	profiles: [],
+	profiles: null,
 	loading: false,
 };
 
@@ -189,6 +209,26 @@ const profile = createSlice({
 			state.profile = action.payload;
 		},
 		[deleteUser.rejected]: (state) => {
+			state.loading = false;
+		},
+		[getAll.pending]: (state) => {
+			state.loading = true;
+		},
+		[getAll.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.profiles = action.payload;
+		},
+		[getAll.rejected]: (state) => {
+			state.loading = false;
+		},
+		[getById.pending]: (state) => {
+			state.loading = true;
+		},
+		[getById.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.profiles = action.payload;
+		},
+		[getById.rejected]: (state) => {
 			state.loading = false;
 		},
 	},

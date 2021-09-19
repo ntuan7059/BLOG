@@ -6,7 +6,7 @@ import { logout } from "../../reducer/auth";
 const guestLink = (
 	<ul>
 		<li>
-			<Link to='/'>Người dùng</Link>
+			<Link to='/user'>Người dùng</Link>
 		</li>
 		<li>
 			<Link to='/register'>đăng ký</Link>

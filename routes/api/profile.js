@@ -247,7 +247,7 @@ router.put(
 		}
 	}
 );
-// @route   DELETE api/profile//:exp_id
+// @route   DELETE api/profile//:edu_id
 // @desc    DELETE profile education
 // @access  Private
 router.delete("/education/:edu_id", auth, async (req, res) => {
@@ -255,6 +255,8 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 		const profile = await Profile.findOne({ user: req.user.id });
 
 		//GET reomove index
+		//1 array contain id but wwich to remove? easily use indexOf to find the index of the value which = req.params.edu_id
+		// and then use .splice to remove that value
 		const removeIndex = profile.education
 			.map((item) => item.id)
 			.indexOf(req.params.edu_id);

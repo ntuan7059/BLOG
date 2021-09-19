@@ -15,6 +15,7 @@ import CreateProfile from "./components/profile-form/CreateProfile";
 import EditProfile from "./components/profile-form/EditProfile";
 import AddExp from "./components/profile-form/AddEx";
 import AddEdu from "./components/profile-form/AddEdu";
+import Profiles from "./components/Profiles/Profiles";
 
 function App() {
 	const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
 				<div className='container'>
 					<Alert />
 					<Switch>
+						<Route exact path='/user' component={Profiles} />
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
 						<Privateroute exact path='/dashboard' component={Dashboard} />

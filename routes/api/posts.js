@@ -7,12 +7,12 @@ const Profile = require("../../module/Profile");
 const Post = require("../../module/Post");
 const User = require("../../module/User");
 
-// @route POST APi/post
+// @route POST APi/posts
 // @descript CREATE Post
 // @access  PRIVATE
 router.post(
 	"/",
-	[auth, [check("text", "Text is required").not().isEmpty]],
+	[auth, [check("text", "Text is required").not().isEmpty()]],
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -21,12 +21,12 @@ router.post(
 
 		try {
 			const user = await User.findById(req.user.id).select("-password");
-			const newPost = {
+			const newPost = new Post({
 				text: req.body.text,
 				name: user.name,
 				avatar: user.avatar,
 				user: req.user.id,
-			};
+			});
 			const post = await newPost.save();
 
 			res.json(post);
@@ -49,7 +49,7 @@ router.get("/", auth, async (req, res) => {
 		res.status(500).send("Server error");
 	}
 });
-// @route GET APi/post:id
+// @route GET APi/post/id
 // @descript GET post by id
 // @access  PRIVATE
 
@@ -57,34 +57,31 @@ router.get("/:id", auth, async (req, res) => {
 	try {
 		const posts = await Post.findById(req.params.id);
 
-		if (!post) {
+		if (!posts) {
 			return res.status(404).json({ msg: "post not found" });
 		}
 
 		res.json(posts);
 	} catch (error) {
 		console.error(error.message);
-		if (error.kind === "ObjectId") {
-			return res.status(404).json({ msg: "post not found" });
-		}
 		res.status(500).send("Server error");
 	}
 });
-// @route GET APi/post
+// @route GET APi/post/:id
 // @descript Delete post
 // @access  PRIVATE
 
-router.get("/", auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
 	try {
-		const posts = await Post.find(req.params.id);
+		const post = await Post.findById(req.params.id);
 		// check user
 		if (!post) {
 			return res.status(404).json({ msg: "page not found" });
 		}
 
-		if (post.user.toString() !== req.user.id) {
+		/*if (post.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "user not authorized" });
-		}
+		}*/
 
 		await post.remove();
 
@@ -111,6 +108,36 @@ router.put("/like/:id", auth, async (req, res) => {
 			return res.status(400).json({ msg: "Post already liked" });
 		}
 		post.likes.unshift({ user: req.user.id });
+		//Get remove index
+		/*const removeIndex = post.likes
+			.map((like) => like.user.toString())
+			.indexOf(req.user.id);
+		post.likes.splice(removeIndex, 1);*/
+
+		await post.save();
+
+		res.json(post.likes);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Server Error");
+	}
+});
+
+// @route PUT APi/posts/unlike/:id
+// @descript Like a post
+// @access  PRIVATE
+
+router.put("/unlike/:id", auth, async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.id);
+
+		//check if the post has already been liked
+		if (
+			post.likes.filter((like) => like.user.toString() === req.user.id)
+				.length === 0
+		) {
+			return res.status(400).json({ msg: "Post not liked" });
+		}
 		//Get remove index
 		const removeIndex = post.likes
 			.map((like) => like.user.toString())
