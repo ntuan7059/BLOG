@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"description": "shop using MERN",
 	"main": "server.js",
+	"engine": {
+		"node": "16.6.1",
+		"npm": "7.20.3"
+	},
 	"scripts": {
 		"start": "node server",
 		"server": "nodemon server ",
