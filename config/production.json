@@ -1,4 +1,0 @@
-{
-	"jwtToken": "mysecretttoken",
-	"mongoURL": "mongodb+srv://ntuan7059:tuan0922011571@shop.zhxfc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-}
