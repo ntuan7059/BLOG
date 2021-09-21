@@ -4,13 +4,13 @@
 	"description": "shop using MERN",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js",
+		"start": "node server",
 		"server": "nodemon server ",
 		"client": "cd client && npm start",
 		"build": "cd client && npm install",
 		"install-client": "cd client && npm install",
-		"heroku-postbuild": "npm run install-client && npm run build",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"author": "tuan",
 	"license": "ISC",
