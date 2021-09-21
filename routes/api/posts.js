@@ -105,7 +105,7 @@ router.put("/like/:id", auth, async (req, res) => {
 			post.likes.filter((like) => like.user.toString() === req.user.id).length >
 			0
 		) {
-			return res.status(400).json({ msg: "Post already liked" });
+			return res.status(400).send("server error");
 		}
 		post.likes.unshift({ user: req.user.id });
 		//Get remove index
@@ -124,7 +124,7 @@ router.put("/like/:id", auth, async (req, res) => {
 });
 
 // @route PUT APi/posts/unlike/:id
-// @descript Like a post
+// @descript UNLike a post
 // @access  PRIVATE
 
 router.put("/unlike/:id", auth, async (req, res) => {
@@ -157,17 +157,17 @@ router.put("/unlike/:id", auth, async (req, res) => {
 // @access  PRIVATE
 router.post(
 	"/comment/:id",
-	[auth, [check("text", "Text is required").not().isEmpty]],
+	[auth, [check("text", "Text is required").not().isEmpty()]],
 	async (req, res) => {
-		const error = validationResult(req);
+		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.arrays() });
 		}
 
 		try {
 			const user = await User.findById(req.user.id).select("-password");
-			const post = await User.findById(req.user.id);
-			const mewComment = {
+			const post = await Post.findById(req.params.id);
+			const newComment = {
 				text: req.body.text,
 				name: user.name,
 				avatar: user.avatar,
@@ -184,7 +184,7 @@ router.post(
 		}
 	}
 );
-// @route POST APi/post/comment/:id
+// @route POST APi/post/comment/:id/:comment_id
 // @descript DELETE comment
 // @access  PRIVATE
 

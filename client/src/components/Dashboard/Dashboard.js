@@ -17,7 +17,7 @@ function Dashboard() {
 		await dispatch(deleteUser());
 		history.push("/login");
 	};
-	const user = useSelector((state) => state.user.user);
+	const user = useSelector((state) => state.auth.user);
 	const profile = useSelector((state) => state.profile);
 	if (user == null) {
 		return <div>Loading...</div>;

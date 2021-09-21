@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../reducer/auth";
 import { Link, Redirect } from "react-router-dom";
-import { loadUser } from "../../reducer/loadUser";
+import { loadUser } from "../../reducer/auth";
 import setAuthToken from "../../utils/setAuthToken";
 
 function Login() {

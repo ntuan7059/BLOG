@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addEdu, getCurrentUser } from "../../reducer/profile";
+import { addEdu } from "../../reducer/profile";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 

@@ -13,14 +13,16 @@ function Experience() {
 			<td className='hide-sm'>{exp.title}</td>
 			<td>
 				<Moment format='YYYY/MM/DD'>{exp.from}</Moment>-{" "}
-				{exp.to == "" ? (
+				{exp.to === "" ? (
 					"Hiện tại"
 				) : (
 					<Moment format='YYYY/MM/DD'>{exp.to}</Moment>
 				)}
 			</td>
 			<td>
-				<button onClick={(e) => dispatch(deleteExp)} className='btn btn-danger'>
+				<button
+					onClick={(e) => dispatch(deleteExp(exp._id))}
+					className='btn btn-danger'>
 					Xóa
 				</button>
 			</td>

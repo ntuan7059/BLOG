@@ -4,7 +4,7 @@ import { SET_ALERT, REMOVE_ALERT } from "../../reducer/alert";
 import { nanoid } from "@reduxjs/toolkit";
 import { register } from "../../reducer/auth";
 import { Link, Redirect } from "react-router-dom";
-import { loadUser } from "../../reducer/loadUser";
+import { loadUser } from "../../reducer/auth";
 import setAuthToken from "../../utils/setAuthToken";
 
 function Register() {

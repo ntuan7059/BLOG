@@ -34,11 +34,16 @@ export const login = createAsyncThunk(
 		return res.data;
 	}
 );
+export const loadUser = createAsyncThunk("user/loadUser", async () => {
+	const promise = await axios.get("http://localhost:5000/api/auth");
+	return promise.data;
+});
 
 const initialState = {
 	token: localStorage.getItem("token"),
 	loading: true,
 	isAuthenticated: null,
+	user: "",
 };
 
 const auth = createSlice({
@@ -82,6 +87,19 @@ const auth = createSlice({
 			state.token = null;
 			state.loading = false;
 			state.isAuthenticated = false;
+			localStorage.removeItem("token");
+		},
+		[loadUser.pending]: (state) => {
+			state.loading = true;
+		},
+		[loadUser.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.user = action.payload;
+			state.isAuthenticated = true;
+		},
+		[loadUser.rejected]: (state) => {
+			state.loading = false;
+			state.user = null;
 			localStorage.removeItem("token");
 		},
 	},

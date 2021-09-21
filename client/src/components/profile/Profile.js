@@ -8,10 +8,9 @@ function Profile({ match }) {
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth.isAuthenticated);
 	const profile = useSelector((state) => state.profile.profile);
-	const loading = useSelector((state) => state.profile.loading);
 	useEffect(() => {
 		dispatch(getById(match.params.id));
-	}, [dispatch]);
+	}, [dispatch, match.params.id]);
 
 	return (
 		<div>

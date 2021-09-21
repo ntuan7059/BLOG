@@ -6,7 +6,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/layout/Alert";
 import { useDispatch } from "react-redux";
-import { loadUser } from "./reducer/loadUser";
+import { loadUser } from "./reducer/auth";
 import setAuthToken from "./utils/setAuthToken";
 import { useEffect } from "react";
 import Privateroute from "./components/routing/Privateroute";
@@ -18,6 +18,7 @@ import AddEdu from "./components/profile-form/AddEdu";
 import Profiles from "./components/Profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import Post from "./components/posts/Post";
+import PostSing from "./components/post/PostSing";
 
 function App() {
 	const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
 					<Alert />
 					<Switch>
 						<Privateroute exact path='/posts' component={Post} />
+						<Privateroute exact path='/posts/:id' component={PostSing} />
 						<Route exact path='/user' component={Profiles} />
 						<Route exact path='/user/:id' component={Profile} />
 						<Route exact path='/login' component={Login} />
