@@ -15,9 +15,9 @@ function Profile({ match }) {
 	return (
 		<div>
 			{profile === null ? (
-				<>...LOADING</>
+				<div className='container'>...LOADING</div>
 			) : (
-				<>
+				<div className='container'>
 					<Link to='/user' className='btn btn-light'>
 						Quay lại người dùng
 					</Link>
@@ -29,7 +29,7 @@ function Profile({ match }) {
 						<></>
 					)}
 					<EachProfile profile={profile} />
-				</>
+				</div>
 			)}
 		</div>
 	);

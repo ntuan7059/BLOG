@@ -26,7 +26,7 @@ function Login() {
 		return <Redirect to='/dashboard' />;
 	}
 	return (
-		<div>
+		<div className='container'>
 			<section class='container'>
 				<h1 class='large text-primary'>Đăng nhập</h1>
 				<p class='lead'>

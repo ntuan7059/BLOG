@@ -31,26 +31,25 @@ function App() {
 			<Router>
 				<Navbar />
 				<Route exact path='/' component={Landing} />
-				<div className='container'>
-					<Alert />
-					<Switch>
-						<Privateroute exact path='/posts' component={Post} />
-						<Privateroute exact path='/posts/:id' component={PostSing} />
-						<Route exact path='/user' component={Profiles} />
-						<Route exact path='/user/:id' component={Profile} />
-						<Route exact path='/login' component={Login} />
-						<Route exact path='/register' component={Register} />
-						<Privateroute exact path='/dashboard' component={Dashboard} />
-						<Privateroute
-							exact
-							path='/create-profile'
-							component={CreateProfile}
-						/>
-						<Privateroute exact path='/edit-profile' component={EditProfile} />
-						<Privateroute exact path='/add-experience' component={AddExp} />
-						<Privateroute exact path='/add-education' component={AddEdu} />
-					</Switch>
-				</div>
+
+				<Alert />
+				<Switch>
+					<Privateroute exact path='/posts' component={Post} />
+					<Privateroute exact path='/posts/:id' component={PostSing} />
+					<Route exact path='/user' component={Profiles} />
+					<Route exact path='/user/:id' component={Profile} />
+					<Route exact path='/login' component={Login} />
+					<Route exact path='/register' component={Register} />
+					<Privateroute exact path='/dashboard' component={Dashboard} />
+					<Privateroute
+						exact
+						path='/create-profile'
+						component={CreateProfile}
+					/>
+					<Privateroute exact path='/edit-profile' component={EditProfile} />
+					<Privateroute exact path='/add-experience' component={AddExp} />
+					<Privateroute exact path='/add-education' component={AddEdu} />
+				</Switch>
 			</Router>
 		</div>
 	);

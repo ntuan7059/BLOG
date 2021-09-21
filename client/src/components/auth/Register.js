@@ -43,7 +43,7 @@ function Register() {
 		return <Redirect to='/dashboard' />;
 	}
 	return (
-		<div>
+		<div className='container'>
 			<h1 class='large text-primary'>Đăng Ký</h1>
 			<p class='lead'>
 				<i class='fas fa-user'></i> Tạo tài khoản

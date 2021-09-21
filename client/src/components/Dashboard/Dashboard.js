@@ -23,7 +23,7 @@ function Dashboard() {
 		return <div>Loading...</div>;
 	} else
 		return (
-			<>
+			<div className='container'>
 				<h1 className='large text-primary'>Dashboard</h1>
 				<p className='lead'>
 					<i className='fas fa-user'> Chào mừng {user.name}</i>
@@ -49,7 +49,7 @@ function Dashboard() {
 						</div>
 					</>
 				)}
-			</>
+			</div>
 		);
 }
 

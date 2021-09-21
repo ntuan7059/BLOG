@@ -11,9 +11,9 @@ function Profiles() {
 	return (
 		<>
 			{profile.loading ? (
-				<>...LOADING</>
+				<div className='container'>...LOADING</div>
 			) : (
-				<>
+				<div className='container'>
 					<h1 className='large text-primary'>Người dùng</h1>
 					<p className='lead'>
 						<i className='fab fa-connectdevelop'></i>tìm kiếm và kết bạn với
@@ -30,7 +30,7 @@ function Profiles() {
 							</>
 						)}
 					</div>
-				</>
+				</div>
 			)}
 		</>
 	);
