@@ -21,14 +21,15 @@ router.post(
 	async (req, res) => {
 		const err = validationResult(req);
 		if (!err.isEmpty()) {
+			console.log("check");
 			return res.status(400).json({ errors: err.array() });
 		}
 		const { name, email, password } = req.body;
 		try {
-			// co user chua ?
+			// is user existed ?
 			let user = await User.findOne({ email });
 			if (user) {
-				return res.status(400).json({ msg: "user aldready exist" });
+				return res.status(400).json({ error: "user existed" });
 			}
 			// chua co? take Gravatar + creat new user
 			const avatar = gravatar.url(email, {

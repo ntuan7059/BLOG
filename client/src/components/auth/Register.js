@@ -13,6 +13,7 @@ function Register() {
 		name: "",
 		email: "",
 		password: "",
+		password2: "",
 	});
 	const id = nanoid();
 	const dispatch = useDispatch();
@@ -32,10 +33,11 @@ function Register() {
 				})
 			);
 			setTimeout(() => dispatch(REMOVE_ALERT({ id })), 5000);
+		} else {
+			await dispatch(register({ name, email, password }));
+			setAuthToken(localStorage.token);
+			await dispatch(loadUser());
 		}
-		await dispatch(register({ name, email, password }));
-		setAuthToken(localStorage.token);
-		await dispatch(loadUser());
 	};
 	if (isAuthenticated) {
 		return <Redirect to='/dashboard' />;
